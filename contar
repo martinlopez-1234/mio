@@ -1,0 +1,120 @@
+/* 1.a Crea un programa que vaya leyendo las frases que el usuario teclea y las guarde en un fichero de texto llamado “frasesDeBjarme.txt”. 
+Terminará cuando la frase introducida sea "fin" (esa frase no deberá guardarse en el fichero).
+1.c
+Para el  Archivo del ejercicio (a) contar la cantidad de palabras que hay x línea, luego mostrar la cantidad total y el promedio de palabras x línea.
+*/
+
+//Directivas del preprocesador
+#include<iostream>
+#include<fstream>
+#include<string>
+
+//Prototipos de función
+
+void leer();
+void escribir();
+void contar();
+
+
+using namespace std;
+
+int main(){
+
+	int caracteres,palabras;
+
+	escribir();
+	leer();
+	contar();
+	
+
+	return 0;
+}
+
+
+void leer(){
+	ifstream archivo;//Creo la variable que se va a asociar con el archivo en el disco rígido
+	string fraseBjarne;//Creo la variable del tipo string que se afilia con el ifstream archivo
+	archivo.open("/media/martin/Disco_Hikvision/Programas/frases.txt");// Abre el archivo, para que pueda ser leido
+	if (!archivo.is_open()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+	}else{
+		cout << " El archivo se abrio correctamente" << endl;
+
+	}
+
+//Primero necesito volcar la información capturda del archivo txt al contenedor que es la variable tipo string
+//Luego enviar la información guardada en la variable del tipo string a la pantalla
+
+	cout << "Frases de Bjarne ingresadas por el usuario " << endl;
+	while(getline (archivo,fraseBjarne) && fraseBjarne!="fin"){/*Mientras que getline capture datos de la variable del tipo ifstream archivo y los guarde en la variable del tipo string fraseBjarne
+y además en la variable fraseBjarne no aparezca la palabra fin, seguí repitiendo la operación de sacar por pantalla los datos guardados en fraseBjarne.*/
+
+	cout << fraseBjarne << "\n";
+
+
+		}
+	archivo.close();
+
+}
+
+void escribir(){
+
+	ofstream archivo;//Creo variable del tipo ofstream
+	string fraseBjarne;//Variable que va a almacenar los datos enviados enviados en el flujo de datos que van del archivo almacenado en el almacenamiento secundario
+
+
+	archivo.open("/media/martin/Disco_Hikvision/Programas/frases.txt",ios::app);
+
+	if (archivo.fail()){
+		cout<<"No se puede abrir el archivo"<<endl;
+	}else{
+		cout<<"El archivo se abrio de manera correcta"<<endl;
+
+	}
+	
+
+	while(fraseBjarne!="fin"){//Mientras el usuario no intruzca la frase fin, el bucle se repite al infinito.-
+		
+		cout << "Ingrese frases de Bjarne de su preferencia" << endl;
+		
+		getline(cin,fraseBjarne);/*Función que le dice al compilador de C++ que tiene que guardar los datos ingresados por el usuario en la variable del tipo string fraseBjarne. Getline 
+		hace que la información se pueda guardar, aunque el usuario ingrese palabras con espacios en blanco*/
+	
+			if(fraseBjarne!="fin"){//Si los datos ingresados en archivo son distintos a la palabra fin, guarda los datos
+				archivo << fraseBjarne<< endl; //Le indico a C++ que guarde el flujo de información contenido en el string al "archivo físico".
+			}
+
+	}
+	
+	archivo.close();//Cierre del archivo
+}
+
+void contar(){
+	ifstream archivo;
+	string frases;
+	
+	int lineas=0;
+	int palabras=0;
+
+//cantidad de palabras que hay x línea, luego mostrar la cantidad total y el promedio de palabras x línea.
+
+	
+
+
+	archivo.open("/media/martin/Disco_Hikvision/Programas/frases.txt");
+	if (archivo.fail()){
+		cout<<"No se puede abrir el archivo"<<endl;
+	}else{
+		cout<<"El archivo se abrio de manera correcta"<<endl;
+	}
+	
+	while(!archivo.eof()){//Mientras no sea el final del archivo
+		getline(archivo,frases);//Envia datos del stream de archivo a la variable del tipo string frase 
+		for(int i=0;i<frases.length();i++){
+			if(frases[i]==" " && isaplha(frases[i+1])
+		}
+	}
+	cout<< "La cantidad de lineas en la frase es " << lineas <<endl;
+	cout<< "La cantidad de palabras ingresadas es: " <<palabras << endl;
+
+}
